@@ -1,0 +1,79 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API de Análisis de Documentos PDF",
+    "description": "Esta API recibe documentos PDF y devuelve información clave extraída utilizando GPT-4.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://tu-api.herokuapp.com",
+      "description": "Servidor principal de la API"
+    }
+  ],
+  "paths": {
+    "/cargar": {
+      "post": {
+        "operationId": "postModelPrompt",
+        "summary": "Envía una solicitud POST con datos de un archivo PDF para su análisis.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "archivo": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "Archivo PDF a analizar."
+                  }
+                },
+                "required": ["archivo"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Respuesta exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "fecha_mentionada": {
+                      "type": "string",
+                      "description": "La fecha mencionada en el documento."
+                    },
+                    "imputado": {
+                      "type": "string",
+                      "description": "El imputado mencionado en el documento."
+                    },
+                    "fecha_vencimiento_terminos": {
+                      "type": "string",
+                      "description": "La fecha de vencimiento de términos mencionada."
+                    },
+                    "tema_principal": {
+                      "type": "string",
+                      "description": "El tema principal del documento."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Solicitud incorrecta - parámetros inválidos o sintaxis de solicitud mal formada."
+          },
+          "401": {
+            "description": "No autorizado - falta la clave API o es inválida."
+          },
+          "500": {
+            "description": "Error interno del servidor - algo salió mal en el lado del servidor."
+          }
+        }
+      }
+    }
+  }
+}
