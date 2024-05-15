@@ -43,7 +43,7 @@ def obtener_respuestas(texto):
     openai.api_key = 'sk-proj-yuE9WmQMI4guvUeNOt2LT3BlbkFJLpvEMfJAmvni9E6OUWaI'
     preguntas = [
         "¿Cuál es la fecha mencionada en el documento?",
-        "¿Quién es el imputado?",
+        "¿Quién es el cliente?",
         "¿Cuál es la fecha de vencimiento de términos?",
         "¿Cuál es el tema principal del documento?"
     ]
